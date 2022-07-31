@@ -7,16 +7,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.job4j.forum.service.UserServiceImpl;
+import ru.job4j.forum.service.UserServiceRep;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder encoder;
-    private final UserServiceImpl userService;
+    private final UserServiceRep userService;
 
-    public SecurityConfig(PasswordEncoder encoder, UserServiceImpl userService) {
+    public SecurityConfig(PasswordEncoder encoder, UserServiceRep userService) {
         this.encoder = encoder;
         this.userService = userService;
     }

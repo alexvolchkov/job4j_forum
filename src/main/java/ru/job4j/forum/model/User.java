@@ -3,15 +3,25 @@ package ru.job4j.forum.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "users")
 public class User implements UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String password;
     private String username;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = {
+            @JoinColumn(name = "user_id", nullable = false, updatable = false)},
+    inverseJoinColumns = {
+            @JoinColumn(name = "role_id", nullable = false, updatable = false)})
     private Set<Role> roles = new HashSet<>();
 
     public static User of(String username, String password) {

@@ -1,7 +1,6 @@
 package ru.job4j.forum.repository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import ru.job4j.forum.model.Role;
 import ru.job4j.forum.model.User;
 
@@ -11,7 +10,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
 public class UserStoreMem implements UserStore {
     private final Map<Integer, User> users = new HashMap<>();
     private final AtomicInteger id = new AtomicInteger();

@@ -1,13 +1,11 @@
 package ru.job4j.forum.repository;
 
-import org.springframework.stereotype.Repository;
 import ru.job4j.forum.model.Post;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
 public class PostStoreMem implements PostStore {
     private final Map<Integer, Post> posts = new HashMap<>();
     private final AtomicInteger id = new AtomicInteger();

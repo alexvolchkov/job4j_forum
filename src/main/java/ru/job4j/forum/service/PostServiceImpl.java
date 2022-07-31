@@ -1,13 +1,11 @@
 package ru.job4j.forum.service;
 
-import org.springframework.stereotype.Service;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.repository.PostStore;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public class PostServiceImpl implements PostService {
     private final PostStore store;
 

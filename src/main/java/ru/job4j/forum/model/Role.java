@@ -2,9 +2,14 @@ package ru.job4j.forum.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "role")
 public class Role implements GrantedAuthority {
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
