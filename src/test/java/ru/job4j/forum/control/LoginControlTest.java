@@ -33,7 +33,6 @@ class LoginControlTest {
     public void shouldReturnDefaultMessageLogout() throws Exception {
         this.mockMvc.perform(get("/logout"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("logout"));
+                .andExpect(status().is3xxRedirection());
     }
 }
