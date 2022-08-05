@@ -1,7 +1,8 @@
 package ru.job4j.forum.control;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -11,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,10 +41,10 @@ class RegControlTest {
                 .andExpect(view().name("reg"));
     }
 
-    /*
     @Test
     @WithMockUser
     public void shouldReturnDefaultMessageCreate() throws Exception {
+        Mockito.when(users.create(any())).thenReturn(true);
         this.mockMvc.perform(post("/reg")
                         .param("username","User test")
                         .param("password","123456"))
@@ -52,5 +54,16 @@ class RegControlTest {
         verify(users).create(argument.capture());
         assertThat(argument.getValue().getUsername(), is("User test"));
     }
-     */
+
+    @Test
+    @WithMockUser
+    public void shouldReturnDefaultMessageNotCreate() throws Exception {
+        Mockito.when(users.create(any())).thenReturn(false);
+        this.mockMvc.perform(post("/reg")
+                        .param("username","User test")
+                        .param("password","123456"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("reg"));
+    }
 }
